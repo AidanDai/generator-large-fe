@@ -1,1 +1,1 @@
-# some page of some module stylesheets
+# stylesheets of <%= pageName %> page in <%= moduleName %> module 

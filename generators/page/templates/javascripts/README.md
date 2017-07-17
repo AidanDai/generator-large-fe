@@ -1,3 +1,3 @@
-# some page of some module javascripts
+# javascripts of <%= pageName %> page in <%= moduleName %> module 
 
-- adaptation index page controllers mainly, only support this page query data
+- adaptation controllers mainly, only support this page query data; must return a Promise instance

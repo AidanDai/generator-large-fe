@@ -1,0 +1,1 @@
+# pages of <%= moduleName %> module 

@@ -1,1 +1,1 @@
-# some page of some module images
+# images of <%= pageName %> page in <%= moduleName %> module 

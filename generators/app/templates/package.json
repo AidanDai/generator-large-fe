@@ -8,9 +8,6 @@
         "dev": "cross-env NODE_ENV=dev webpack-dev-server",
         "pro": "cross-env NODE_ENV=pro webpack"
     },
-    "dependencies": {
-        
-    },
     "devDependencies": {
         "add-asset-html-webpack-plugin": "^2.0.1",
         "antd": "^2.5.0",

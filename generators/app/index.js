@@ -91,7 +91,12 @@ module.exports = class extends Generator {
 
   writing() {
     this.fs.copy(
-      this.templatePath('generators/app/templates'),
+      this.templatePath('generators/app/templates/'),
+      this.destinationPath('./')
+    )
+
+    this.fs.copy(
+      this.templatePath('generators/app/templates/.*'),
       this.destinationPath('./')
     )
   }

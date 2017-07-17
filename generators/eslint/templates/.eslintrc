@@ -1,0 +1,81 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended", "standard", "standard-react"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "standard",
+        "promise",
+        "import",
+        "node",
+        "react"
+    ],
+    "rules": {
+        // react
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+
+        // 控制逗号前后的空格
+        "comma-spacing": ["error", {"before": false, "after": true}],
+
+        // 用===代替==
+        "eqeqeq": ["error", "allow-null"],
+
+        // 数组和对象键值对最后一个逗号
+        // never: 不能带末尾的逗
+        // always: 必须带末尾的逗号
+        // always-multiline: 多行必须带逗号，单行不能带逗号
+        "comma-dangle": ["error", "never"],
+
+        // 强制使用一致的缩进
+        "indent": ["error", 4],
+        "linebreak-style": ["error", "unix"],
+
+        // 使用单引号
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],
+
+        // 禁用console
+        "no-console": "warn",
+
+        // 禁用 alert、confirm 和 prompt
+        "no-alert": "warn",
+
+        //　禁止对象字面量中出现重复的key
+        "no-dupe-keys": "error",
+
+        //　禁止出现重复的case
+        "no-duplicate-case": "error",
+
+        // 禁止出现空语句块
+        "no-empty": "error",
+
+        // 要求switch语句中有default分支
+        "default-case": "error",
+
+        // 禁用 eval()
+        "no-eval": "error",
+
+        // 禁止使用多个空格
+        "no-multi-spaces": "error",
+
+        // 禁止多次声明同一变量
+        "no-redeclare": "error",
+
+        // 禁用特定的全局变量
+        "no-restricted-globals": "error",
+        
+        // 要求操作符周围有空格
+        "space-infix-ops": "error"
+    }
+}

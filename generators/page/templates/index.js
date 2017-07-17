@@ -1,5 +1,5 @@
 /**
- * @file: 
+ * @file: some description for this file
  * @author: <%= author %>
  * @date: <%= date %>
  */
@@ -13,7 +13,7 @@ let pageData = JSON.parse(document.querySelector('[name=pageData]').getAttribute
 
 ReactDOM.render(
     <<%= className %>
-        pageData={pageData}
+        {...pageData}
     />,
     mountNode
 );
