@@ -1,5 +1,0 @@
-/**
- * @file: some description for this file
- * @author: <%= author %>
- * @date: <%= date %>
- */
