@@ -5,15 +5,37 @@
  */
 
 import React, { Component } from 'react';
-import Request from './javascripts';
+import { connect } from 'react-redux'
 
-import './stylesheets/index.less';
+import {  } from '../actions'
+import {  } from '../controllers'
+import './stylesheets/index.css';
 
-export default class <%= className %> extends Component {
+class <%= className %> extends Component {
+
+  constructor(props) {
+    super(props)
+  }
+
+  componentDidMount() {
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+  }
 
   render() {
     return (
-      <div></div>
+      <div styleName="main">
+        hello generator-large-fe!
+      </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+
+}
+
+export default connect(mapStateToProps)(<%= className %>)

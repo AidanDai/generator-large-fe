@@ -36,10 +36,11 @@ module.exports = class extends Generator {
 				default: '0.0.1'
 			},
 			{
-				type: 'confirm',
-				name: 'less',
-				message: 'Do you want to use less?',
-				default: true
+				type: 'list',
+				name: 'style',
+				message: 'Which css solution plan do you want to use?',
+                choices: ['css modules', 'less'],
+				default: 'css modules'
 			},
 			{
 				type: 'confirm',
@@ -64,10 +65,10 @@ module.exports = class extends Generator {
 	}
 
 	configuring() {
-		// style 
-		if (this.less) {
-			this.devInstall.push('less', 'less-loader')
-		}
+		// style
+        if (this.style === 'less') {
+            this.devInstall.push('less', 'less-loader')
+        }
 
 		if (this.postcss) {
 			this.devInstall.push('postcss-import', 'postcss-loader')
@@ -111,8 +112,9 @@ module.exports = class extends Generator {
 			'babel-core',						// Babel compiler core
 			'babel-loader',						// Webpack plugin for Babel
 			'babel-plugin-import',				// antd 或 antd-mobile 按需加载脚本和样式
+            'babel-plugin-react-css-modules'    // Transforms styleName to className using compile time CSS module resolution.
 			'babel-plugin-transform-runtime',	// 提供 babel-runtime 包供编译模块复用工具函数(https://segmentfault.com/q/1010000005596587)
-			'babel-polyfill',					// 给原声 JavaScript 打补丁
+            'babel-polyfill',					// 给原声 JavaScript 打补丁
 			'babel-preset-env',					// 支持 JavaScript 最新特性
 			'babel-preset-react',				// 支持 JSX 合 Flow
 			'clean-webpack-plugin',				// A webpack plugin to remove your build folder(s) before building
@@ -122,7 +124,7 @@ module.exports = class extends Generator {
 			'happypack',						// Happiness in the form of faster webpack build times.
 			'html-webpack-plugin',				// Simplifies creation of HTML files to serve your webpack bundles(生成 html 静态文件)
 			'image-webpack-loader',				// Image loader module for webpack(Minify PNG, JPEG, GIF and SVG images with imagemin)
-			'react-hot-loader@next',			// Tweak React components in real time. 
+			'react-hot-loader@next',			// Tweak React components in real time.
 			'style-loader',						// style loader module for webpack
 			'url-loader',						// url loader module for webpack(can return a DataURL)
 			'webpack',							// A bundler for javascript and friends.
