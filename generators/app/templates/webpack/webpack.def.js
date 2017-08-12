@@ -1,14 +1,11 @@
 const path = require('path')
 const webpack = require('webpack')
 
-const getPath = (str = '') => {
-	return path.resolve(__dirname, `../src/pages/${str}`)
-}
+const utils = require('./utils')
+const map = utils.readJSON('./map.json')
 
 module.exports = {
-	entry: { // 
-		
-	},
+	entry: utils.mapResolve(map),
 	resolve: {
 	  modules: [
 	  	'node_modules',

@@ -10,9 +10,6 @@ import {
 
 } from '../constants'
 
-const reducers = {
-  postsBySubreddit,
-  selectedSubreddit
-}
+const reducers = {}
 
 export default combineReducers(reducers)

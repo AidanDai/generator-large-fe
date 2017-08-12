@@ -9,7 +9,7 @@ module.exports = class extends Generator {
 
         this.sourceRoot(rootPath)
     }
-    
+
     writing() {
         // Create the modules
         const options = this.arguments.slice()

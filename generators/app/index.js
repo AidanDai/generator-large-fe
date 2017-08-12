@@ -1,9 +1,10 @@
 'use strict'
+require('babel-register')
 const path = require('path')
-const shell = require('shelljs')
 const chalk = require('chalk')
 const yosay = require('yosay')
 const Generator = require('yeoman-generator')
+const utils = require('../utils')
 
 const rootPath = path.resolve(__dirname, '../..')
 
@@ -16,10 +17,20 @@ module.exports = class extends Generator {
 		))
 
 		this.sourceRoot(rootPath)
-		this.install = ['react', 'react-dom', 'babel-runtime']
+		this.install = [
+            'react',
+            'react-dom',
+            'react-redux',
+            'redux',
+            'redux-immutablejs',
+            'immutable',
+            'redux-thunk',
+            'redux-logger',
+            'babel-runtime'
+        ]
 		this.devInstall = []
-		this.author = shell.exec('git config user.name', {silent: true}).stdout.replace(/\n/g, '') + ' ' + shell.exec('git config user.email', {silent: true}).stdout.replace(/\n/g, '')
-	}
+		this.author = `${this.user.git.name()} ${this.user.git.email()}`
+    }
 
 	prompting() {
 		return this.prompt([
@@ -54,27 +65,33 @@ module.exports = class extends Generator {
 				message: 'Which component package do you want to use?',
 				choices: ['ant-design', 'ant-design-mobile'],
 				default: 'ant-design'
-			}
+			},
+            {
+                type: 'imput',
+                name: 'viewsPath',
+                message: 'Please set views path, this will be handled by `path.resolve()`',
+                default: path.resolve('./views')
+            }
 		]).then((answers) => {
 			this.name = answers.name
 			this.version = answers.version
 			this.less = answers.less
 			this.postcss = answers.postcss
-			this.component = answers.component
+			this.component = answers.component,
+            this.viewsPath = path.resolve(answers.viewsPath)
 		})
 	}
 
 	configuring() {
-		// style
+		// set dev
         if (this.style === 'less') {
             this.devInstall.push('less', 'less-loader')
         }
 
 		if (this.postcss) {
-			this.devInstall.push('postcss-import', 'postcss-loader')
+			this.devInstall.push('postcss-import', 'postcss-px2rem', 'postcss-loader')
 		}
 
-		// component lib
 		if (this.component === 'ant-design') {
 			this.install.push('antd')
 		}
@@ -82,6 +99,13 @@ module.exports = class extends Generator {
 		if (this.component === 'ant-design-mobile') {
 			this.install.push('antd-mobile')
 		}
+
+        // write config
+        const configPath = path.join(`${this.sourceRoot(rootPath)}`, 'generators/config.json')
+        const appConfigPath = path.join(`${this.sourceRoot(rootPath)}`, 'generators/app/templates/config/config.def.js')
+        const config = { viewsPath: this.viewsPath }
+        utils.writeJSON(configPath, config)
+        utils.writeJavaScript(appConfigPath, config)
 
 	}
 
@@ -112,7 +136,7 @@ module.exports = class extends Generator {
 			'babel-core',						// Babel compiler core
 			'babel-loader',						// Webpack plugin for Babel
 			'babel-plugin-import',				// antd 或 antd-mobile 按需加载脚本和样式
-            'babel-plugin-react-css-modules'    // Transforms styleName to className using compile time CSS module resolution.
+            'babel-plugin-react-css-modules',   // Transforms styleName to className using compile time CSS module resolution.
 			'babel-plugin-transform-runtime',	// 提供 babel-runtime 包供编译模块复用工具函数(https://segmentfault.com/q/1010000005596587)
             'babel-polyfill',					// 给原声 JavaScript 打补丁
 			'babel-preset-env',					// 支持 JavaScript 最新特性
@@ -124,7 +148,7 @@ module.exports = class extends Generator {
 			'happypack',						// Happiness in the form of faster webpack build times.
 			'html-webpack-plugin',				// Simplifies creation of HTML files to serve your webpack bundles(生成 html 静态文件)
 			'image-webpack-loader',				// Image loader module for webpack(Minify PNG, JPEG, GIF and SVG images with imagemin)
-			'react-hot-loader@next',			// Tweak React components in real time.
+            'react-hot-loader@next',			// Tweak React components in real time.
 			'style-loader',						// style loader module for webpack
 			'url-loader',						// url loader module for webpack(can return a DataURL)
 			'webpack',							// A bundler for javascript and friends.

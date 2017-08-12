@@ -6,14 +6,16 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import <%= className %> from 'index.page';
+import <%= className %> from 'controllers/index';
 
-let mountNode = document.querySelector('#content');
-let pageData = JSON.parse(document.querySelector('[name=pageData]').getAttribute('content'));
+import { getPagedata } from '../../../public/javascripts/utils'
+
+const mountNode = getMountNode()
+const pageData = getPagedata();
 
 ReactDOM.render(
     <<%= className %>
-        {...pageData}
+        context={pageData.context}
     />,
     mountNode
 );

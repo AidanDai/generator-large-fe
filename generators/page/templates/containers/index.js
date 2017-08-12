@@ -17,6 +17,10 @@ class <%= className %> extends Component {
     super(props)
   }
 
+  getChildContext() {
+    return this.props.context || {}
+  }
+
   componentDidMount() {
 
   }
