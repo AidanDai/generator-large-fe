@@ -18,7 +18,7 @@ module.exports = class extends Generator {
         let options = this.arguments.slice()
         let module = options.shift()
         let webpackConfigPath = this.destinationPath('./webpack/webpack.entry.json')
-        let isExist = utils.moduleIsExist(module)
+        let isExist = utils.moduleIsExist(this.destinationPath(`./client/${module}`), module)
         let configPath = path.join(rootPath, './generators/config.json')
         let config = utils.readJSON(configPath)
 
