@@ -13,6 +13,7 @@ module.exports = class extends Generator {
     writing() {
         // Create the modules
         const options = this.arguments.slice()
+
         for (let key of options) {
             const seeting = {
                 moduleName: key
@@ -20,7 +21,7 @@ module.exports = class extends Generator {
 
             this.fs.copyTpl(
                 this.templatePath('generators/module/templates'),
-                this.destinationPath(`./src/modules/${key}`),
+                this.destinationPath(`./client/${key}`),
                 seeting
             )
         }

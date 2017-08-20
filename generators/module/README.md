@@ -8,25 +8,22 @@ Example:
     yo large-fe:module user
 
     This will create:
-        app/src/modules/user
+        app/client/user
 
 - it can create controllers in batch
 ```
 
-app/src/modules/user
+app/client/user
 
 ```
-├── components          # user 模块 component 组件
-│   └── README.md        
-├── containers          # user 模块 container 组件
-│   └── README.md
-├── controllers         # user 模块控制器文件
-│   └── README.md
-├── models              # user 模块模型文件
-│   └── README.md
-├── pages               # user 模块视图文件
-│   └── README.md
-└── README.md
+├── actions                             // 模块 redux action 目录
+├── constants                           // 模块 redux action type constant 目录
+├── reducers                            // 模块 redux reducer 目录
+├── services                            // 模块 service 目录
+├── stores                              // 模块 redux store 目录
+├── utils                               // 模块工具函数目录
+└── views                               // 模块 view 目录
+    └── components                      // 公共组件目录
 ```
 
 注：具体每个目录结构的用途请参见该文件夹下的 README.md

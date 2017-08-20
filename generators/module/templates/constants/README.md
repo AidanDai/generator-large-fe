@@ -1,0 +1,1 @@
+# contants of <%= moduleName %> module 

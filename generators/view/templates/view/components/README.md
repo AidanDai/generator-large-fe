@@ -1,0 +1,1 @@
+# component of <%= moduleName %> module 

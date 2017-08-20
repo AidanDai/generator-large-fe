@@ -1,5 +1,3 @@
-'use strict'
-require('babel-register')
 const path = require('path')
 const chalk = require('chalk')
 const yosay = require('yosay')
@@ -19,17 +17,22 @@ module.exports = class extends Generator {
 		this.sourceRoot(rootPath)
 		this.install = [
             'react',
+            'prop-types',
             'react-dom',
             'react-redux',
             'redux',
             'redux-immutablejs',
             'immutable',
+            'react-immutable-proptypes',
             'redux-thunk',
             'redux-logger',
-            'babel-runtime'
+            'babel-runtime',
+            'axios',
+            'moment',
+            'querystring'
         ]
 		this.devInstall = []
-		this.author = `${this.user.git.name()} ${this.user.git.email()}`
+        this.author = `${this.user.git.name()} ${this.user.git.email()}`
     }
 
 	prompting() {
@@ -45,13 +48,24 @@ module.exports = class extends Generator {
 				name: 'version',
 				message: 'Please input your application version',
 				default: '0.0.1'
-			},
-			{
-				type: 'list',
-				name: 'style',
-				message: 'Which css solution plan do you want to use?',
-                choices: ['css modules', 'less'],
-				default: 'css modules'
+            },
+            {
+				type: 'confirm',
+				name: 'flexible',
+				message: 'Enable lib-flexible? see more detail https://github.com/amfe/lib-flexible/tree/master',
+				default: true
+            },
+            {
+				type: 'confirm',
+				name: 'cssModules',
+				message: 'Enable css modules? see more detail https://github.com/css-modules/css-modules',
+				default: true
+            },
+            {
+				type: 'confirm',
+				name: 'less',
+				message: 'Enable less?',
+				default: true
 			},
 			{
 				type: 'confirm',
@@ -63,28 +77,35 @@ module.exports = class extends Generator {
 				type: 'list',
 				name: 'component',
 				message: 'Which component package do you want to use?',
-				choices: ['ant-design', 'ant-design-mobile'],
-				default: 'ant-design'
-			},
+				choices: ['antd', 'antd-mobile'],
+				default: 'antd'
+            },
             {
-                type: 'imput',
-                name: 'viewsPath',
-                message: 'Please set views path, this will be handled by `path.resolve()`',
-                default: path.resolve('./views')
+				type: 'list',
+				name: 'server',
+				message: 'Which server do you want to use?',
+				choices: ['express', 'koa'],
+				default: 'express'
             }
 		]).then((answers) => {
 			this.name = answers.name
-			this.version = answers.version
+            this.version = answers.version
+            this.flexible = answers.flexible
+			this.cssModules = answers.cssModules
 			this.less = answers.less
 			this.postcss = answers.postcss
-			this.component = answers.component,
-            this.viewsPath = path.resolve(answers.viewsPath)
+            this.component = answers.component
+            this.server = answers.server
 		})
 	}
 
 	configuring() {
-		// set dev
-        if (this.style === 'less') {
+        // set dev
+        if (this.flexible) {
+            this.install.push('lib-flexible', 'fastclick')
+        }
+
+        if (this.less) {
             this.devInstall.push('less', 'less-loader')
         }
 
@@ -97,23 +118,32 @@ module.exports = class extends Generator {
 		}
 
 		if (this.component === 'ant-design-mobile') {
-			this.install.push('antd-mobile')
+            this.install.push('antd-mobile')
+            this.devInstall.push('svg-sprite-loader')
 		}
 
         // write config
         const configPath = path.join(`${this.sourceRoot(rootPath)}`, 'generators/config.json')
-        const appConfigPath = path.join(`${this.sourceRoot(rootPath)}`, 'generators/app/templates/config/config.def.js')
-        const config = { viewsPath: this.viewsPath }
-        utils.writeJSON(configPath, config)
-        utils.writeJavaScript(appConfigPath, config)
+        const config = {
+            flexible: this.flexible,
+            cssModules: this.cssModules,
+            component: this.component,
+            server: this.server
+        }
 
+        utils.writeJSON(configPath, config)
 	}
 
 	writing() {
 		const setting = {
 			name: this.name,
 			version: this.version,
-			author: this.author
+            author: this.author,
+            less: this.less,
+            postcss: this.postcss,
+            flexible: this.flexible,
+            cssModules: this.cssModules,
+            component: this.component
 		}
 
 		this.fs.copyTpl(
@@ -125,7 +155,15 @@ module.exports = class extends Generator {
 		this.fs.copy(
 			this.templatePath('generators/app/templates/.*'),
 			this.destinationPath('./')
-		)
+        )
+
+        this.composeWith(require.resolve('../server'), {
+            server: this.server
+        })
+
+        this.composeWith(require.resolve('../babel'), {
+            component: this.component
+        })
 	}
 
 	install() {
@@ -136,7 +174,6 @@ module.exports = class extends Generator {
 			'babel-core',						// Babel compiler core
 			'babel-loader',						// Webpack plugin for Babel
 			'babel-plugin-import',				// antd 或 antd-mobile 按需加载脚本和样式
-            'babel-plugin-react-css-modules',   // Transforms styleName to className using compile time CSS module resolution.
 			'babel-plugin-transform-runtime',	// 提供 babel-runtime 包供编译模块复用工具函数(https://segmentfault.com/q/1010000005596587)
             'babel-polyfill',					// 给原声 JavaScript 打补丁
 			'babel-preset-env',					// 支持 JavaScript 最新特性
@@ -144,21 +181,27 @@ module.exports = class extends Generator {
 			'clean-webpack-plugin',				// A webpack plugin to remove your build folder(s) before building
 			'cross-env',						// Cross platform setting of environment scripts
 			'css-loader',						// css loader module for webpack
-			'extract-text-webpack-plugin',		// Extract text from bundle into a file.（抽取 css）
+            'cssnano',
+            'extract-text-webpack-plugin',		// Extract text from bundle into a file.（抽取 css）
 			'happypack',						// Happiness in the form of faster webpack build times.
 			'html-webpack-plugin',				// Simplifies creation of HTML files to serve your webpack bundles(生成 html 静态文件)
 			'image-webpack-loader',				// Image loader module for webpack(Minify PNG, JPEG, GIF and SVG images with imagemin)
-            'react-hot-loader@next',			// Tweak React components in real time.
-			'style-loader',						// style loader module for webpack
+            'react-addons-perf',
+            'react-hot-loader',     			// Tweak React components in real time.
+            'shelljs',
+            'style-loader',						// style loader module for webpack
 			'url-loader',						// url loader module for webpack(can return a DataURL)
 			'webpack',							// A bundler for javascript and friends.
-			'webpack-dev-server'				// Serves a webpack app. Updates the browser on changes.
+            'webpack-dev-middleware',				// Serves a webpack app. Updates the browser on changes.
+            'webpack-hot-middleware'
 		])
 		const options = {
 			'save-dev': true
-		}
+        }
 
-		this.npmInstall(this.install)
-		this.npmInstall(devInstall, options)
+        // console.log(this.install.sort())
+        // console.log(devInstall.sort())
+		//this.npmInstall(this.install)
+		//this.npmInstall(devInstall, options)
 	}
 }

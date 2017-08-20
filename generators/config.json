@@ -1,3 +1,6 @@
 {
-    "viewsPath": "/home/guokr/code/Aidan/projects/odin/statics/views"
+    "flexible": true,
+    "cssModules": true,
+    "component": "antd",
+    "server": "express"
 }

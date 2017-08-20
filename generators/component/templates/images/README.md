@@ -1,6 +1,6 @@
 <% if (moduleName && componentName) { %>
-# images of <%= componentName %> in <%= moduleName %> module 
+# images of <%= componentName %> <%= type %> component in <%= moduleName %> module 
 <% } %>
 <% if (!moduleName) { %>
-# images of <%= componentName %> in project
+# images of <%= componentName %> <%= type %> component in project
 <% } %>

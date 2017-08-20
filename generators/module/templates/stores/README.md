@@ -1,0 +1,1 @@
+# stores of <%= moduleName %> module 

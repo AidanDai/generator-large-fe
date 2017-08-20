@@ -1,3 +1,10 @@
-import config from `./config.${process.env.NODE_ENV || 'dev'}`
+const development = require('./config.development')
+const production = require('./config.production')
 
-export default config
+const env = process.env.NODE_ENV || 'development'
+const config = {
+    development: development,
+    production: production
+}
+
+module.exports = config[env]

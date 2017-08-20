@@ -2,15 +2,14 @@ const fs = require('fs')
 const path = require('path')
 const utils = {}
 
-
 /**
  * [readJSON description]
  * @param  {[type]} filepath [description]
  * @return {[type]}          [description]
  */
 utils.readJSON = function readJSON(filepath) {
-    let path = path.resolve(filepath)
-    let json = fs.readFileSync(path)
+    let p = path.resolve(filepath)
+    let json = fs.readFileSync(p)
 
     return JSON.parse(json)
 }
@@ -29,42 +28,41 @@ utils.writeJSON = function writeJSON(filepath, obj = {}) {
     return fs.writeFileSync(filepath, prettyJSON)
 }
 
-/**
- * [writeJavaScript description]
- * @param  {[type]} filepath [description]
- * @param  {String} content  [description]
- * @return {[type]}          [description]
- */
-utils.writeJavaScript = function writeJavaScript(filepath, obj = {}) {
-    const config = require(filepath)
-    const target = utils._objConcat(config, obj)
-    const code = utils._createJavaScriptCode(target)
+utils.moduleIsExist = function moduleIsExist(modulePath, module) {
+    if (!fs.existsSync(modulePath)) {
+        console.log(`Not find '${module}' module.\nPlease usage:\n\t'yo large-fe:module ${module}'\nTo create '${module}' module firstly`)
+        return false
+    }
 
-    return fs.writeFileSync(filepath, code)
+    let moduleStat = fs.statSync(modulePath)
+
+    if (!moduleStat.isDirectory()) {
+        console.log(`Not find '${module}' module.\nplease usage:\n\t'yo large-fe:module ${module}'\nTo create '${module}' module firstly`)
+        if (moduleStat.isFile()) {
+            console.log(`But ${module} file exist, you must remove that file firstly!`)
+        }
+        return false
+    }
+
+    return true
 }
 
-/**
- * [_objConcat description]
- * @param  {...[type]} argus [description]
- * @return {[type]}          [description]
- */
-utils._objConcat = function _objConcat(...argus) {
-    const objs = argus.slice(1)  // skip default
+utils.viewIsExist = function viewIsExist(viewPath, module, view) {
+    if (!fs.existsSync(viewPath)) {
+        console.log(`Not find '${view}' view.\nPlease usage:\n\t'yo large-fe:view ${module} ${view}'\nTo create '${view}' view firstly`)
+        return false
+    }
 
-    return Object.assign.apply(null, objs)
-}
+    let viewStat = fs.statSync(viewPath)
 
-/**
- * [_createJavaScriptCode description]
- * @param  {Object} obj [description]
- * @return {[type]}     [description]
- */
-utils._createJavaScriptCode = function _createJavaScriptCode(obj = {}) {
-    const prettyJSON = JSON.stringify(obj, null, '    ')
-    const code = `const config = ${prettyJSON}
+    if (!viewStat.isDirectory()) {
+        console.log(`Not find '${view}' view.\nplease usage:\n\t'yo large-fe:view ${module}' ${view}\nTo create '${view}' view firstly`)
+        if (viewStat.isFile()) {
+            console.log(`But ${view} file exist, you must remove that file firstly!`)
+        }
+        return false
+    }
 
-export default config
-`
-    return code
+    return true
 }
 module.exports = utils

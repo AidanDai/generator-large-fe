@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+    <title>{{ title }}</title>
+    <meta charset="UTF-8">
+    <meta name="pageData" content="{{ pageData }}">
+
+    {% block meta %}
+    <meta name="format-detection" content="telephone=no" />
+    {% endblock %}
+
+    {% block stylesheet %}
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+
+    {% block javascript %}
+    {% endblock %}
+</body>
+</html>

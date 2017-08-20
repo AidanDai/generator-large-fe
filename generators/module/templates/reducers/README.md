@@ -1,0 +1,1 @@
+# reducers of <%= moduleName %> module 
