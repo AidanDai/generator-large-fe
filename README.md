@@ -2,38 +2,6 @@
 
 > generator-large-fe - this is a powerful generator for Front end engineer or Full Stack Developer of Guokr, that can be used to create and Large FE projects that use React(antd or antd-mobile), Redux, Immutable, Express.  
 
-## Features
-
-### FE Project
-
-- [x] react
-- [x] antd or antd-mobile
-- [x] redux
-- [x] immutable
-- [x] css module
-- [x] postcss
-- [x] less
-
-### Front end Engineering
-
-- [x] eslint
-- [x] gitlab hooks of eslint 
-- [x] gulp
-- [x] webpack
-
-### Node Arch
-
-- [x] express
-
-## Planned Features and updates
-
-- [ ] support express logs and tests firstly
-- [ ] support more Node Arch, example koa, egg and so on
-
-## Requirements
-
-Make sure your Node.js version is >= 7.6.0 and npm version is >= 3.0.0
-
 ## Installation
 
 First, install [Yeoman](http://yeoman.io) and generator-large-fe using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
@@ -47,6 +15,18 @@ Then generate your new project:
 
 ```bash
 yo large-fe
+```
+
+## Usage
+
+```bash
+npm run gulp:dev // only firstly when development or you change some file in `.client/assets`
+
+npm run dll // only firstly when development
+
+npm run dev // start development
+
+npm run deploy // deploy application
 ```
 
 ## Generating Command
@@ -123,17 +103,37 @@ Example:
                 --container is container component
 ```
 
-## Usage
+## Features
 
-```bash
-npm run gulp:dev // only firstly when development or you change some file in `.client/assets`
+### FE Project
 
-npm run dll // only firstly when development
+- [x] react
+- [x] antd or antd-mobile
+- [x] redux
+- [x] immutable
+- [x] css module
+- [x] postcss
+- [x] less
 
-npm run dev // start development
+### Front end Engineering
 
-npm run deploy // deploy application
-```
+- [x] eslint
+- [x] gitlab hooks of eslint 
+- [x] gulp
+- [x] webpack
+
+### Node Arch
+
+- [x] express
+
+## Planned Features and updates
+
+- [ ] support express logs and tests firstly
+- [ ] support more Node Arch, example koa, egg and so on
+
+## Requirements
+
+Make sure your Node.js version is >= 7.6.0 and npm version is >= 3.0.0
 
 ## Contribute
 
