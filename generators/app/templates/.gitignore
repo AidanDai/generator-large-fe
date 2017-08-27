@@ -1,3 +1,5 @@
 node_modules
-.idea
-.vs_code
+server/public
+server/views/production
+.DS_Store
+npm-debug.log

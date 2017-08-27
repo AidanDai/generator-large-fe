@@ -3,20 +3,24 @@ const path = require('path')
 const glob = require('glob')
 const nunjucks = require('nunjucks')
 const shell = require('shelljs')
-const config = require('./config')
 
 const rootSrc = path.resolve(__dirname, './')
 const viewsSrc = path.join(rootSrc, './server/views/development')
-const staticsSrc = path.join(rootSrc, './server/public')
-const assetsJSON = fs.readFileSync(path.join(staticsSrc, './assets.json'))
-const tplPaths = glob.sync(path.join(viewsSrc, './**/*.html'))
 const proViewsSrc = path.join(rootSrc, './server/views/production')
+const tplPaths = glob.sync(path.join(viewsSrc, './**/*.html'))
 
+const publicSrc = path.join(rootSrc, './server/public')
+const bundlesJSON = fs.readFileSync(path.join(publicSrc, './bundles/bundles.json'))
+const assetsJSON = fs.readFileSync(path.join(publicSrc, './assets/assets.json'))
+
+let bundles
 let assets
 try {
+    bundles = JSON.parse(bundlesJSON)
     assets = JSON.parse(assetsJSON)
-} catch(e) {
+} catch (e) {
     console.log(e)
+    bundles = {}
     assets = {}
 }
 
@@ -49,7 +53,7 @@ function renderStatics(tplPaths) {
         let tplPath = tpl.substr(index)
         let tplPathPerfix = tplPath.substr(0, tplPath.length - 5)
 
-        if (!(tplPathPerfix in assets)) {
+        if (!(tplPathPerfix in bundles)) {
             continue
         }
 
@@ -57,11 +61,14 @@ function renderStatics(tplPaths) {
         let context = {
             isPro: process.env.NODE_ENV === 'production',
             isDev: process.env.NODE_ENV === 'development',
-            title: "{{ title }}",
-            pageData: "{{ pageData }}",
-            bundle_js: assets.bundle && assets.bundle.js,
-            [`${key}_js`]: assets[tplPathPerfix] && assets[tplPathPerfix].js,
-            [`${key}_css`]: assets[tplPathPerfix] && assets[tplPathPerfix].css
+            title: '{{ title }}',
+            pageData: '{{ pageData }}',
+            bundle_js: bundles.bundle && bundles.bundle.js,
+            [`${key}_js`]: bundles[tplPathPerfix] && bundles[tplPathPerfix].js,
+            [`${key}_css`]: bundles[tplPathPerfix] && bundles[tplPathPerfix].css,
+            main_js: assets['main.js'],
+            graphics_css: assets['graphics.css'],
+            main_css: assets['main.css']
         }
 
 

@@ -5,12 +5,12 @@ const development = {
     root: rootPath,
     app: {
         name: 'baldur',
-        host: process.env.APP_HOST || 'chat-test.guokr.net',
+        host: process.env.APP_HOST || 'flashtalk.guokr.net',
         debug: true,
 
         // cookie
         ymir_domain: process.env.YMIR_DOMAIN || '.guokr.net',
-        cookie_domain: process.env.COOKIE_DOMAIN || '.chat-test.guokr.net',
+        cookie_domain: process.env.COOKIE_DOMAIN || '.guokr.net',
 
         // API
         api_host: process.env.API_HOST || 'apis-ft-test.guokr.net',
@@ -29,7 +29,7 @@ const development = {
         // secret
         client_secret: 'IMaRAY2ncfmI1Oqq'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 3000
 }
 
 if (development.app.debug) {

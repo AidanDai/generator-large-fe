@@ -1,2 +1,2 @@
-coverage
-generators/*/templates
+generators
+node_modules

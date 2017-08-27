@@ -1,12 +1,9 @@
-const os = require('os')
-const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
 const postcssImport = require('postcss-import')
 const autoprefixer = require('autoprefixer')
 const px2rem = require('postcss-px2rem')
 const defaultConfig = require('./webpack.default')
-const config = require('../config')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const AssetsWebpackPlugin = require('assets-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -15,17 +12,23 @@ const cssnano = require('cssnano')
 const rootPath = path.resolve(__dirname, '../')
 const outputPath = path.resolve(__dirname, '../server/public')
 const srcPath = path.resolve(__dirname, '../client')
+
 <% if (component === 'antd-mobile') { %>
 const svgDirs = [
     require.resolve('antd-mobile').replace(/warn\.js$/, '')
 ]
 <% } %>
+
 const extractCSS = new ExtractTextPlugin({
     allChunks: true,
+    disable: false,
+    ignoreOrder: true,
     filename: 'bundles/stylesheets/[name].[hash:5].css'
 })
 const extractLESS = new ExtractTextPlugin({
     allChunks: true,
+    disable: false,
+    ignoreOrder: true,
     filename: 'bundles/stylesheets/[name].[hash:5].css'
 })
 
@@ -45,19 +48,18 @@ const productionConfig = {
             },
             {
                 test: /\.(css)$/,
-                include: [srcPath],
                 use: extractCSS.extract({
                     fallback: 'style-loader',
                     use: [
                         {
                             loader: 'css-loader',
+                            <% if (cssModule) { %>
                             options: {
                                 importLoaders: 1,
-                                <% if (cssModules) { %>
                                 modules: true,
                                 localIdentName: '[name]-[hash:base64:5]'
-                                <% } %>
                             }
+                            <% } %>
                         },
                         <% if (postcss) { %>
                         {
@@ -79,15 +81,16 @@ const productionConfig = {
                                     cssnano()
                                 ]
                             }
-                        }
+                        },
                         <% } %>
+                        {
+                            loader: 'less-loader'
+                        }
                     ]
                 })
             },
-            <% if (less) { %>
             {
                 test: /\.(less)$/,
-                include: [srcPath],
                 use: extractLESS.extract({
                     fallback: 'style-loader',
                     use: [
@@ -125,7 +128,6 @@ const productionConfig = {
                     ]
                 })
             },
-            <% } %>
             {
                 test: /\.(jpe?g|png|gif)$/,
                 include: [srcPath],
@@ -181,19 +183,19 @@ const productionConfig = {
         ],
     },
     plugins: [
-        new CleanWebpackPlugin([ 'assets', 'bundles', './*.*' ], {
+        new CleanWebpackPlugin([ 'bundles' ], {
             root: outputPath
         }),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
-            minChunks: Infinity,
+            minChunks: 2,
             name: 'bundle'
         }),
         new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 15 }),
         new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 1000 }),
         new webpack.optimize.UglifyJsPlugin({
             output: {
-                comments: false,
+                comments: false
             },
             compress: {
                 warnings: false,
@@ -204,7 +206,7 @@ const productionConfig = {
         new AssetsWebpackPlugin({
             prettyPrint: true,
             includeManifest: 'manifest',
-            filename: 'assets.json',
+            filename: 'bundles/bundles.json',
             path: outputPath
         }),
         extractCSS,

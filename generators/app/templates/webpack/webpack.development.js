@@ -1,5 +1,4 @@
 const os = require('os')
-const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
 const HappyPack = require('happypack')
@@ -7,8 +6,6 @@ const postcssImport = require('postcss-import')
 const autoprefixer = require('autoprefixer')
 const px2rem = require('postcss-px2rem')
 const defaultConfig = require('./webpack.default')
-const config = require('../config')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 const rootPath = path.resolve(__dirname, '../')
@@ -54,16 +51,15 @@ const developmentConfig = {
             },
             {
                 test: /\.(css)$/,
-                include: [srcPath],
                 use: [
                     'style-loader',
                     {
                         loader: 'css-loader',
-                        <% if (cssModules) { %>
+                        <% if (cssModule) { %>
                         options: {
                             modules: true,
                             importLoaders: 1,
-                            localIdentName: '[name]-[path]-[hash:base64:5]'
+                            localIdentName: '[local]-[hash:base64:5]'
                         }
                         <% } %>
                     },
@@ -86,14 +82,15 @@ const developmentConfig = {
                                 <% } %>
                             ]
                         }
-                    }
+                    },
                     <% } %>
+                    {
+                        loader: 'less-loader'
+                    }
                 ]
             },
-            <% if (less) { %>
             {
                 test: /\.(less)$/,
-                include: [srcPath],
                 use: [
                     'style-loader',
                     'css-loader',
@@ -110,7 +107,7 @@ const developmentConfig = {
                                         'Firefox ESR',
                                         'not ie < 9' // React doesn't support IE8 anyway
                                     ]
-                                })
+                                }),
                                 <% if (flexible) { %>
                                 px2rem({ remUnit: 75 })
                                 <% } %>
@@ -123,7 +120,6 @@ const developmentConfig = {
                     }
                 ]
             },
-            <% } %>
             {
                 test: /\.(jpe?g|png|gif)$/,
                 include: [srcPath],
@@ -176,7 +172,7 @@ const developmentConfig = {
                 include: svgDirs
             }
             <% } %>
-        ],
+        ]
     },
     plugins: [
         new webpack.DllReferencePlugin({
@@ -191,7 +187,7 @@ const developmentConfig = {
         }),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
-            minChunks: Infinity,
+            minChunks: 2,
             name: 'bundle'
         }),
         new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 15 }),

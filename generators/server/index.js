@@ -6,29 +6,27 @@ const rootPath = path.resolve(__dirname, '../..')
 
 module.exports = class extends Generator {
     constructor(args, options) {
-        const install = [
-            'jwt-simple',
+        super(args, options)
+
+        this.server = options.server
+        this.install = [
             'http-proxy-middleware',
+            'jwt-simple',
             'nunjucks',
-            'serve-favicon',
             'superagent'
         ]
-        const expressInstall = [
+        this.expressInstall = [
             'body-parser',
             'compression',
             'cookie-parser',
             'express',
             'method-override',
             'morgan',
+            'serve-favicon'
         ]
-
-        super(args, options)
+        this.author = `${this.user.git.name()} ${this.user.git.email()}`
 
         this.sourceRoot(rootPath)
-        this.server = options.server
-		this.install = install.concat(expressInstall)
-		this.devInstall = []
-        this.author = `${this.user.git.name()} ${this.user.git.email()}`
     }
 
     writing() {
@@ -44,10 +42,11 @@ module.exports = class extends Generator {
     }
 
     install() {
-        console.log(this.install.sort())
-        console.log(this.devInstall.sort())
-		//this.npmInstall(this.install)
-		//this.npmInstall(devInstall, options)
+        let install = {
+            express: this.install.concat(this.expressInstall)
+        }
+
+		this.npmInstall(install[this.server])
     }
 }
 

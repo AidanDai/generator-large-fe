@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block stylesheet %}
+    {% if isDev %}
+    <link type="text/css" rel="stylesheet" href="/assets/stylesheets/main.css">
+    {% endif %}
+    {% if isPro %}
+    <link type="text/css" rel="stylesheet" href="/assets/stylesheets/{{ main_css }}">
+    <link type="text/css" rel="stylesheet" href="{{ home_index_css }}">
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div id="app"></div>
+{% endblock %}
+
+{% block javascript %}
+    {% if isDev %}
+    <script type="text/javascript" src="/bundles/javascripts/vendor.dll.js"></script>
+    <script type="text/javascript" src="/bundles/javascripts/bundle.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/main.js"></script>
+    <script type="text/javascript" src="/bundles/javascripts/home/index.js"></script>
+    {% endif %}
+    {% if isPro %}
+    <script type="text/javascript" src="/assets/javascripts/{{ main_js }}"></script>
+    <script type="text/javascript" src="{{ bundle_js }}"></script>
+    <script type="text/javascript" src="{{ home_index_js }}"></script>
+    {% endif %}
+{% endblock %}

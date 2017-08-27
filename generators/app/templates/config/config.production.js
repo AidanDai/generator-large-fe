@@ -5,7 +5,7 @@ const production = {
     root: rootPath,
     app: {
         name: 'baldur',
-        host: process.env.APP_HOST || 'chat-test.guokr.net',
+        host: process.env.APP_HOST || 'flashtalk.guokr.net',
         debug: true,
 
         // cookie
@@ -29,7 +29,7 @@ const production = {
         // secret
         client_secret: 'IMaRAY2ncfmI1Oqq'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 3000
 }
 
 if (production.app.debug) {

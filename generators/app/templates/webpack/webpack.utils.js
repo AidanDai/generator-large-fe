@@ -9,7 +9,7 @@ function _createHRMWebpackEntry(entryMap) {
     Object.keys(entryMap).map((key) => {
         config[key] = [
             'webpack-hot-middleware/client',
-            path.join(rootPath, './client', `./${entryMap[key]}/index.js`),
+            path.join(rootPath, './client', `./${entryMap[key]}/index.js`)
         ]
     })
 
@@ -21,7 +21,7 @@ function _createProWebpackEntry(entryMap) {
 
     Object.keys(entryMap).map((key) => {
         config[key] = [
-            path.join(rootPath, './client', `./${entryMap[key]}/index.js`),
+            path.join(rootPath, './client', `./${entryMap[key]}/index.js`)
         ]
     })
 
@@ -31,11 +31,11 @@ function _createProWebpackEntry(entryMap) {
 utils.getWebpackEntry = function getWebpackEntry(env = 'development', entryJSON) {
     var entryMap = JSON.parse(entryJSON)
 
-    switch(env) {
+    switch (env) {
         case 'development':
             return _createHRMWebpackEntry(entryMap)
         case 'production':
-            return  _createProWebpackEntry(entryMap)
+            return _createProWebpackEntry(entryMap)
         default:
             return _createHRMWebpackEntry(entryMap)
     }

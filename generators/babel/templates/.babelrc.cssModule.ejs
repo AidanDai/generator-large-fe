@@ -1,0 +1,30 @@
+{
+    "presets": [
+        [
+            "es2015",
+            {
+                "modules": false
+            }
+        ],
+        [
+            "react"
+        ]
+    ],
+    "plugins": [
+        "transform-runtime",
+        [
+            "import",
+            {
+                "style": true,
+                "libraryName": "<%= component %>"
+            }
+        ],
+        [
+            "react-css-modules",
+            {
+                "webpackHotModuleReloading": true,
+                "generateScopedName": "[local]-[hash:base64:5]"
+            }
+        ]
+    ]
+}

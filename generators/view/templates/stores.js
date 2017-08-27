@@ -12,14 +12,16 @@ import combined from '../reducers/detail'
 
 function reduxStore(initialState) {
     const loggerMiddleware = createLogger()
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
     const store = createStore(
         combined,
         initialState,
-        applyMiddleware(
+        composeEnhancers(applyMiddleware(
             thunkMiddleware,
             loggerMiddleware
-        ),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        )),
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
     )
     if (module.hot) {
         // Enable Webpack hot module replacement for reducers

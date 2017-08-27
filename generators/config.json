@@ -1,6 +1,6 @@
 {
     "flexible": true,
-    "cssModules": true,
+    "cssModule": true,
     "component": "antd",
     "server": "express"
 }

@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const glob = require('glob')
-const favicon = require('serve-favicon')
+// const favicon = require('serve-favicon')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
@@ -10,7 +10,6 @@ const methodOverride = require('method-override')
 const nunjucks = require('nunjucks')
 const proxy = require('http-proxy-middleware')
 
-const config = require('../config')
 const mws = require('../server/middlewares')
 
 module.exports = function(app, config) {
@@ -21,7 +20,6 @@ module.exports = function(app, config) {
 
     // Hot reload middlewares were used in firstly constant!
     if (env === 'development') {
-        const mws = require('../server/middlewares')
         const webpack = require('webpack')
         const webpackMiddleware = require('webpack-dev-middleware')
         const webpackHotMiddleware = require('webpack-hot-middleware')
@@ -33,13 +31,10 @@ module.exports = function(app, config) {
         app.use(webpackHotMiddleware(compiler))
     }
 
-    app.use('/v1', proxy({
-        target: 'https://cnodejs.org/api ',
-        secure: true,
-        changeOrigin: true,
-        onProxyReq: function (proxyReq, req, res) {
-            // console.log(proxyReq)
-        }
+    // proxy config
+    app.use('/api', proxy({
+        target: config.app.api_base_path,
+        changeOrigin: true
     }))
 
     const viewsPath = path.join(config.root, `/server/views/${env}`)
@@ -58,7 +53,7 @@ module.exports = function(app, config) {
     app.use(mws.common)
 
     const controllers = glob.sync(config.root + '/server/controllers/*.js')
-    controllers.forEach(function (controller) {
+    controllers.forEach(function(controller) {
         require(controller)(app)
     })
 
@@ -69,8 +64,7 @@ module.exports = function(app, config) {
     })
 
     if (app.get('env') === 'development') {
-        app.use(function(err, req, res, next) {
-            console.log(err)
+        app.use(function(err, req, res) {
             res.status(err.status || 500)
             res.render('error.html', {
                 message: err.message,
@@ -80,7 +74,7 @@ module.exports = function(app, config) {
         })
     }
 
-    app.use(function(err, req, res, next) {
+    app.use(function(err, req, res) {
         res.status(err.status || 500)
         res.render('error.html', {
             message: err.message,

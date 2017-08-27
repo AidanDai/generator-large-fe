@@ -1,5 +1,38 @@
-# generator-large-fe [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> a generator of large front-end for react, redux, less, postcss webpack, express or koa.
+# generator-large-fe
+
+> generator-large-fe - this is a powerful generator for Front end engineer or Full Stack Developer of Guokr, that can be used to create and Large FE projects that use React(antd or antd-mobile), Redux, Immutable, Express.  
+
+## Features
+
+### FE Project
+
+- [x] react
+- [x] antd or antd-mobile
+- [x] redux
+- [x] immutable
+- [x] css module
+- [x] postcss
+- [x] less
+
+### Front end Engineering
+
+- [x] eslint
+- [x] gitlab hooks of eslint 
+- [x] gulp
+- [x] webpack
+
+### Node Arch
+
+- [x] express
+
+## Planned Features and updates
+
+- [ ] support express logs and tests firstly
+- [ ] support more Node Arch, example koa, egg and so on
+
+## Requirements
+
+Make sure your Node.js version is >= 7.6.0 and npm version is >= 3.0.0
 
 ## Installation
 
@@ -16,6 +49,38 @@ Then generate your new project:
 yo large-fe
 ```
 
+## Generating Command
+
+
+
+## Usage
+
+```bash
+npm run gulp:dev // only firstly when development or you change some file in `.client/assets`
+
+npm run dll // only firstly when development
+
+npm run dev // start development
+
+npm run deploy // deploy application
+```
+
+## Contribute
+
+Contributions are welcome. If you find something is missing or there are errors hidden somewhere, feel free to add a new issue.
+
+If you want to submit a pull request please do so from and against the develop branch.
+
+```bash
+git clone git@git.iguokr.com:wenqiao/generator-large-fe.git
+
+npm link
+```
+
+## Maintainer
+
+- 文桥 qiao.wen@guokr.com
+
 ## Getting To Know Yeoman
 
  * Yeoman has a heart of gold.
@@ -26,13 +91,3 @@ yo large-fe
 ## License
 
 MIT © [AidanDai](https://aidandai.github.io)
-
-
-[npm-image]: https://badge.fury.io/js/generator-large-fe.svg
-[npm-url]: https://npmjs.org/package/generator-large-fe
-[travis-image]: https://travis-ci.org/AidanDai/generator-large-fe.svg?branch=master
-[travis-url]: https://travis-ci.org/AidanDai/generator-large-fe
-[daviddm-image]: https://david-dm.org/AidanDai/generator-large-fe.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/AidanDai/generator-large-fe
-[coveralls-image]: https://coveralls.io/repos/AidanDai/generator-large-fe/badge.svg
-[coveralls-url]: https://coveralls.io/r/AidanDai/generator-large-fe

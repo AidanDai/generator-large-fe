@@ -8,7 +8,7 @@ const outputPath = path.resolve(__dirname, '../server/public')
 
 module.exports = {
     entry: {
-        vendor: [vendorEntry],
+        vendor: [vendorEntry]
     },
     output: {
         path: path.join(dllSrc, './javascripts'),
@@ -16,7 +16,7 @@ module.exports = {
         library: '[name]_[hash]'
     },
     plugins: [
-        new CleanWebpackPlugin([ 'assets', 'bundles', './*.*' ], {
+        new CleanWebpackPlugin([ 'bundles' ], {
             root: outputPath
         }),
         new webpack.DllPlugin({

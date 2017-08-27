@@ -6,16 +6,17 @@
     "repository": "",
     "main": "app.js",
     "scripts": {
+        "clean": "rm -rf ./server/public/*",
+        "gulp:dev": "cross-env NODE_ENV=development gulp",
+        "gulp:pro": "cross-env NODE_ENV=production gulp",
+        "webpack:pro": "cross-env NODE_ENV=production webpack",
         "dll": "cross-env NODE_ENV=development webpack --config ./webpack/webpack.vendor.config.js",
-        "clean": "rm -rf ./server/public/* ./server/views/development/*",
-        "build:dev": "cross-env NODE_ENV=development webpack",
-        "build:dev:error": "cross-env NODE_ENV=development webpack --display-error-details",
-        "dev": "cross-env NODE_ENV=development node app.js",
-        "build:pro": "cross-env NODE_ENV=production webpack",
-        "build:pro:error": "cross-env NODE_ENV=production webpack --display-error-details",
+        "dev": "cross-env NODE_ENV=development nodemon app.js",
+        "pro": "cross-env NODE_ENV=production nodemon app.js",
         "publish": "cross-env NODE_ENV=production node ./publish.statics.js",
-        "pro": "cross-env NODE_ENV=production node app.js",
-        "deploy": "npm run build:pro && npm run publish && npm run pro"
+        "static": "npm run dll && npm run gulp:dev",
+        "build": "npm run webpack:pro && npm run gulp:pro",
+        "deploy": "npm run build && npm run publish && npm run pro"
     },
     "author": "<%= author %>",
     "license": "ISC"

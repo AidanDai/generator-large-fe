@@ -9,4 +9,4 @@
     └── normalize.min.css   // 例如：引入 normalize 库
 ```
 
-注：与 server/public/assets 对应
+注：与 server/public/assets 对应，如果需要 Global Assets 需要引入 Gulp 打包

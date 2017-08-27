@@ -13,15 +13,27 @@ module.exports = class extends Generator {
     }
 
     writing() {
+        let configPath = path.join(rootPath, './generators/config.json')
+        let config = utils.readJSON(configPath)
         const setting = {
-            component: this.component
+            component: this.component,
         }
 
-		this.fs.copyTpl(
-			this.templatePath(`generators/babel/templates/.babelrc.tpl`),
-			this.destinationPath('./.babelrc'),
-			setting
-		)
+        if (config.cssModule) {
+            this.fs.copyTpl(
+                this.templatePath(`generators/babel/templates/.babelrc.cssModule.ejs`),
+                this.destinationPath('./.babelrc'),
+                setting
+            )
+            return
+        }
+
+        this.fs.copyTpl(
+            this.templatePath(`generators/babel/templates/.babelrc.ejs`),
+            this.destinationPath('./.babelrc'),
+            setting
+        )
+
     }
 }
 

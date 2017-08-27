@@ -32,7 +32,8 @@ module.exports = class extends Generator {
                 moduleName: module,
                 author: `${this.author}`,
                 date: new Date(),
-                flexible: config.flexible
+                flexible: config.flexible,
+                redux: this.options['redux'] || false
             }
 
             // create views

@@ -13,6 +13,7 @@ Example:
     options:
         --module
         --views
+        --redux
 
 - it can create controllers in batch
 ```
