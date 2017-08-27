@@ -1,0 +1,5 @@
+client/assets/*
+node_modules/*
+server/apis/*
+server/public/*
+server/view/*

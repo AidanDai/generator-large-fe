@@ -1,0 +1,127 @@
+{
+    "env": {
+        "node": true,
+        "es6": true,
+        "commonjs": true
+    },
+    "parser": "babel-eslint",
+    "plugins": [
+        "react"
+    ],
+    "globals": {
+        "window": true
+    },
+    "rules": {
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "react/prop-types": 1,
+        "react/react-in-jsx-scope": 1,
+
+        "comma-spacing": [
+            "error",
+            {
+                "before": false,
+                "after": true
+            }
+        ],
+        "eqeqeq": [
+            "error",
+            "allow-null"
+        ],
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "indent": [
+            "error",
+            4,
+            { "SwitchCase": 1 }
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ],
+        "no-alert": "warn",
+        "no-dupe-keys": "error",
+        "no-undefined": "error",
+        "no-duplicate-case": "error",
+        "no-empty": "error",
+        "default-case": "error",
+        "no-eval": "error",
+        "no-multi-spaces": "error",
+        "no-redeclare": "error",
+        "no-restricted-globals": "error",
+        "space-infix-ops": "error",
+        "strict": 0,
+        "curly": [
+            2,
+            "multi-line"
+        ],
+        "no-use-before-define": [
+            2,
+            "nofunc"
+        ],
+        "no-unused-vars": [
+            2,
+            "all"
+        ],
+        "no-mixed-requires": [
+            1,
+            true
+        ],
+        "max-depth": [
+            1,
+            5
+        ],
+        "max-len": [
+            1,
+            120,
+            4
+        ],
+        "max-params": [
+            1,
+            6
+        ],
+        "max-statements": [
+            1,
+            80
+        ],
+        "new-cap": 0,
+        "no-else-return": 1,
+        "no-eq-null": 1,
+        "no-lonely-if": 1,
+        "no-path-concat": 0,
+        "complexity": [
+            1,
+            20
+        ],
+        "no-floating-decimal": 1,
+        "no-void": 1,
+        "consistent-this": [
+            1,
+            "nope-dont-capture-this"
+        ],
+        "max-nested-callbacks": [
+            2,
+            3
+        ],
+        "no-nested-ternary": 1,
+        "keyword-spacing": 1,
+        "space-before-function-paren": [
+            1,
+            "never"
+        ],
+        "spaced-comment": [
+            1,
+            "always"
+        ]
+    }
+}
