@@ -51,7 +51,77 @@ yo large-fe
 
 ## Generating Command
 
+### create module
 
+```
+Description:
+    Creates a new module
+
+Example:
+    yo large-fe:module user
+
+    arguments:
+        first: module name, like home, user ...
+
+    This will create:
+        app/client/user
+
+- it can create controllers in batch, when you use `yo large-fe:module home user ...`
+```
+
+see [create a new module](./generators/module/README.md)  for more detail
+
+### create view
+
+```
+Description:
+    Creates a new view in module
+
+Example:
+    yo large-fe:view user profile
+
+    This will create:
+        app/client/user/views/profile
+
+    arguments
+        first: module name, like home, user ...
+        second: view name, like index, profile ...
+    options:
+        first: Do you use Redux? `--redux` or empty, default without redux for this view
+
+- it can create controllers in batch,  when you use `yo large-fe:view user profile  setting ...`
+```
+
+see [create a new view in module](./generators/view/README.md)  for more detail
+
+### create component
+
+```
+Description:
+    Creates a new component
+
+Example:
+    yo large-fe:component header                                            # 创建全局 component 组件（默认）
+    yo large-fe:component user header                                       # 创建 user 模块下的 component 组件
+    yo large-fe:component user index header                                 # 创建 user 模块下 index 页面的 component 组件
+    yo large-fe:component user index header --container                     # 创建 user 模块下 index 页面的 container 组件
+    
+    This will create:
+        app/client/common/components/Header
+        app/client/user/views/components/Header
+        app/client/user/views/index/components/Header
+        app/client/user/views/index/containers/Header
+
+    arguments:
+        first: module name, like home, user ... it's selectable
+        second: view name, like profile, setting ... it's selectable
+        third: component name, like header, menu ...
+
+    options
+        first:  is it presentational component or container component ? --component is default 
+                --component is presentational component
+                --container is container component
+```
 
 ## Usage
 

@@ -1,0 +1,31 @@
+/*
+ * @file: some description for this file
+ * @author: <%= author %>
+ * @date: <%= date %>
+ */
+
+.main {
+    width: 800px;
+    margin: 0 auto;
+}
+.title {
+    text-align: center;
+}
+.intor {
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: center;
+    margin: 0 auto;
+}
+.h3 {
+    padding-left: 30px;
+}
+section ul {
+    margin-left: 50px;
+}
+li {
+    line-height: 1.5;
+}
+.repo {
+    text-align: center;
+}

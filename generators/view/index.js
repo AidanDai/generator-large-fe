@@ -49,14 +49,16 @@ module.exports = class extends Generator {
             utils.writeJSON(webpackConfigPath, entry)
 
             // create soemthing about redux
-            const reduxHelpers = ['actions', 'constants', 'reducers', 'services', 'stores']
-            reduxHelpers.map((helper) => {
-                this.fs.copyTpl(
-                    this.templatePath(`generators/view/templates/${helper}.js`),
-                    this.destinationPath(`./client/${module}/${helper}/${key}.js`),
-                    setting
-                )
-            })
+            if (setting.redux ) {
+                const reduxHelpers = ['actions', 'constants', 'reducers', 'services', 'stores']
+                reduxHelpers.map((helper) => {
+                    this.fs.copyTpl(
+                        this.templatePath(`generators/view/templates/${helper}.js`),
+                        this.destinationPath(`./client/${module}/${helper}/${key}.js`),
+                        setting
+                    )
+                })
+            }
         }
     }
 }

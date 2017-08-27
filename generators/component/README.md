@@ -6,22 +6,25 @@ Description:
 
 Example:
     yo large-fe:component header                                            # 创建全局 component 组件（默认）
-    yo large-fe:component user header                                       # 创建　user 模块下的 component 组件
-    
+    yo large-fe:component user header                                       # 创建 user 模块下的 component 组件
     yo large-fe:component user index header                                 # 创建 user 模块下 index 页面的 component 组件
     yo large-fe:component user index header --container                     # 创建 user 模块下 index 页面的 container 组件
     
     This will create:
         app/client/common/components/Header
-        app/client/user/views/components
+        app/client/user/views/components/Header
         app/client/user/views/index/components/Header
         app/client/user/views/index/containers/Header
 
+    arguments:
+        first: module name, like home, user ... it's selectable
+        second: view name, like profile, setting ... it's selectable
+        third: component name, like header, menu ...
+
     options
-        [module name]
-        [view name] 
-        [component name]
-        [component type] [--component|--container], --component is default
+        first:  is it presentational component or container component ? --component is default 
+                --component is presentational component
+                --container is container component
 ```
 
 app/client/common/components/Header

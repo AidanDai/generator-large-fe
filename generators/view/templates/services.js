@@ -6,6 +6,6 @@
 
 import {
 
-} from '../constants/<%= view %>'
+} from '../actions/<%= view %>'
 // import .. from '../../common/models/..'
 // import { .. } from '../../common/utils/..'

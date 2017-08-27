@@ -1,5 +1,5 @@
 {
-    "flexible": true,
+    "flexible": false,
     "cssModule": true,
     "component": "antd",
     "server": "express"

@@ -7,10 +7,13 @@ Description:
 Example:
     yo large-fe:module user
 
+    arguments:
+        first: module name, like home, user ...
+
     This will create:
         app/client/user
 
-- it can create controllers in batch
+- it can create controllers in batch, when you use `yo large-fe:module home user ...`
 ```
 
 app/client/user
