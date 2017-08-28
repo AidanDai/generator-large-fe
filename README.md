@@ -1,6 +1,6 @@
 # generator-large-fe
 
-> generator-large-fe is a powerful generator for Front end engineer or Full Stack Developer, that can be used to create and Large FE projects that use React(antd or antd-mobile), Redux, Immutable, Express.  
+> Generator-large-fe is a powerful generator for Front end engineer or Full Stack Developer, which can be used to create and Large FE projects that use React(antd or antd-mobile), Redux, Immutable, Express.  
 
 ## Installation
 

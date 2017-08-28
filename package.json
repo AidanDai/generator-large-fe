@@ -1,7 +1,7 @@
 {
   "name": "generator-large-fe",
-  "version": "0.0.1",
-  "description": "this is a powerful generator for Front end engineer or Full Stack Developer of Guokr, that can be used to create and Large FE projects that use React(antd or antd-mobile), Redux, Immutable, Express. see [generator-large-fe](https://github.com/AidanDai/generator-large-fe) for more detail",
+  "version": "0.0.2",
+  "description": "Generator-large-fe is a powerful generator for Front end engineer or Full Stack Developer, which can be used to create and Large FE projects that use React(antd or antd-mobile), Redux, Immutable, Express. see [generator-large-fe](https://github.com/AidanDai/generator-large-fe) for more detail",
   "homepage": "https://github.com/AidanDai/generator-large-fe",
   "author": {
     "name": "AidanDai",
