@@ -120,7 +120,6 @@ Example:
 ### Front end Engineering
 
 - [x] eslint
-- [x] gitlab hooks of eslint 
 - [x] gulp
 - [x] webpack
 
@@ -130,6 +129,7 @@ Example:
 
 ## Planned Features and updates
 
+- [ ] gitlab hooks of eslint 
 - [ ] support express logs and tests firstly
 - [ ] support more Node Arch, example koa, egg and so on
 
