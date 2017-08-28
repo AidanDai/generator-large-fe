@@ -28,9 +28,6 @@
     "yeoman-generator": "^1.0.0",
     "yosay": "^2.0.0"
   },
-  "scripts": {
-    "prepublish": "nsp check"
-  },
   "eslintConfig": {
     "extends": "xo-space",
     "env": {
