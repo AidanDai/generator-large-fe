@@ -1,8 +1,8 @@
 {
   "name": "generator-large-fe",
-  "version": "0.0.0",
-  "description": "a generator of large front-end for react, less, postcss, webpack, ant-design or ant-design-mobile.",
-  "homepage": "",
+  "version": "0.0.1",
+  "description": "this is a powerful generator for Front end engineer or Full Stack Developer of Guokr, that can be used to create and Large FE projects that use React(antd or antd-mobile), Redux, Immutable, Express. see [generator-large-fe](https://github.com/AidanDai/generator-large-fe) for more detail",
+  "homepage": "https://github.com/AidanDai/generator-large-fe",
   "author": {
     "name": "AidanDai",
     "email": "aidandai@126.com",
@@ -11,40 +11,29 @@
   "files": [
     "generators"
   ],
-  "main": "generators/index.js",
+  "main": "generators/app/index.js",
   "keywords": [
     "yeoman-generator yeoman generator large-front-end",
     "yeoman-generator"
   ],
   "devDependencies": {
-    "coveralls": "^2.12.0",
     "eslint": "^3.18.0",
     "eslint-config-xo-space": "^0.16.0",
-    "jest": "^19.0.2",
-    "jest-cli": "^19.0.1",
     "nsp": "^2.6.3",
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.6.0"
   },
   "dependencies": {
-    "babel-preset-env": "^1.6.0",
-    "babel-register": "^6.24.1",
     "chalk": "^1.1.3",
     "yeoman-generator": "^1.0.0",
     "yosay": "^2.0.0"
   },
-  "jest": {
-    "testEnvironment": "node"
-  },
   "scripts": {
-    "prepublish": "nsp check",
-    "pretest": "eslint . --fix",
-    "test": "jest"
+    "prepublish": "nsp check"
   },
   "eslintConfig": {
     "extends": "xo-space",
     "env": {
-      "jest": true,
       "node": true
     }
   },

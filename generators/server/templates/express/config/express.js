@@ -29,12 +29,17 @@ module.exports = function(app, config) {
 
         app.use(webpackMiddleware(compiler, webpackMiddlewareConfig))
         app.use(webpackHotMiddleware(compiler))
+
+        app.use(logger('dev'))
+    } else {
+        app.use(logger(':response-time :method :url'))
     }
 
     // proxy config
     app.use('/api', proxy({
-        target: config.app.api_base_path,
-        changeOrigin: true
+        target: config.app.api,
+        changeOrigin: true,
+        secure: config.app.api_secure
     }))
 
     const viewsPath = path.join(config.root, `/server/views/${env}`)
@@ -43,7 +48,6 @@ module.exports = function(app, config) {
     nunjucks.configure(viewsPath, { autoescape: true, express: app})
 
     // app.use(favicon(config.root + '/favicon.ico'))
-    app.use(logger('dev'))
     app.use(bodyParser.json({ limit: '1mb' }))
     app.use(bodyParser.urlencoded({ extended: true, limit: '1mb'}))
     app.use(cookieParser(config.app.client_secret))

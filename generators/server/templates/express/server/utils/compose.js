@@ -1,13 +1,13 @@
 /**
  * 组合多个 Promise 的 model
  *
- * @param {any} promises
- * {
- *      me: user.userUidGet(req, uid, ...)
- *      group: group.groupGroupIdGet(req, uid, ...)
- * }
- * @param {any} next  express 中的 next
- * @returns
+ * @param   {object} promises
+ *          {
+ *              me: user.userUidGet(req, uid, query)
+ *              friends: user.friendsUserIdGet(req, uid, query)
+ *          }
+ * @param   {functioon} next  express 中的 next
+ * @returns {function} Promise
  */
 function compose(promises, next) {
 

@@ -13,10 +13,11 @@
         "dll": "cross-env NODE_ENV=development webpack --config ./webpack/webpack.vendor.config.js",
         "dev": "cross-env NODE_ENV=development nodemon app.js",
         "pro": "cross-env NODE_ENV=production nodemon app.js",
-        "publish": "cross-env NODE_ENV=production node ./publish.statics.js",
-        "static": "npm run dll && npm run gulp:dev",
+        "tpl": "cross-env NODE_ENV=production node ./tpl.js",
+        "publish": "cross-env NODE_ENV=production node ./publish.js",
+        "init": "npm run gulp:dev && npm run dll",
         "build": "npm run webpack:pro && npm run gulp:pro",
-        "deploy": "npm run build && npm run publish && npm run pro"
+        "deploy": "npm run build && npm run tpl && npm run publish && npm run pro"
     },
     "author": "<%= author %>",
     "license": "ISC"

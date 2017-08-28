@@ -9,6 +9,7 @@ class User extends Base {
     userUidGet(req, uid, query = {}) {
         this.init(req)
 
+        // TODO, this is a example that get user data
         return () => {
             return new Promise((resolve, reject) => {
                 const Api = this.Api

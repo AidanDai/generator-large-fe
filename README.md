@@ -24,6 +24,8 @@ npm run gulp:dev // only firstly when development or you change some file in `.c
 
 npm run dll // only firstly when development
 
+npm run init // npm run gulp:dev && npm run dll
+
 npm run dev // start development
 
 npm run deploy // deploy application
@@ -81,10 +83,10 @@ Description:
     Creates a new component
 
 Example:
-    yo large-fe:component header                                            # 创建全局 component 组件（默认）
-    yo large-fe:component user header                                       # 创建 user 模块下的 component 组件
-    yo large-fe:component user index header                                 # 创建 user 模块下 index 页面的 component 组件
-    yo large-fe:component user index header --container                     # 创建 user 模块下 index 页面的 container 组件
+    yo large-fe:component header                              # create header component in global(default)
+    yo large-fe:component user header                         # create header component in user module
+    yo large-fe:component user index header                   # create header component in index view of user module
+    yo large-fe:component user index header --container       # create header container component in index view of user module
     
     This will create:
         app/client/common/components/Header
@@ -149,7 +151,7 @@ npm link
 
 ## Maintainer
 
-- 文桥 qiao.wen@guokr.com
+- AidanDai aidandai@126.com
 
 ## Getting To Know Yeoman
 

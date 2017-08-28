@@ -51,39 +51,39 @@ module.exports = class extends Generator {
             {
 				type: 'confirm',
 				name: 'flexible',
-				message: 'Enable lib-flexible?(see more detail https://github.com/amfe/lib-flexible/tree/master)',
+				message: 'Enable lib-flexible ? (see https://github.com/amfe/lib-flexible/tree/master for more detail )',
 				default: false
             },
             {
 				type: 'confirm',
 				name: 'cssModule',
-				message: 'Enable css modules?(see more detail https://github.com/css-modules/css-modules)',
+				message: 'Enable css modules ? (see https://github.com/css-modules/css-modules for more detail)',
 				default: true
             },
             {
 				type: 'confirm',
 				name: 'less',
-				message: 'Enable less?',
+				message: 'Enable less ?',
 				default: true
 			},
 			{
 				type: 'confirm',
 				name: 'postcss',
-				message: 'Enable postcss?',
+				message: 'Enable postcss ?',
 				default: true
 			},
 			{
 				type: 'list',
 				name: 'component',
-				message: 'Which component package do you want to use?',
+				message: 'Which component package do you want to use ?',
 				choices: ['antd', 'antd-mobile'],
 				default: 'antd'
             },
             {
 				type: 'list',
 				name: 'server',
-				message: 'Which server do you want to use?',
-				choices: ['express', 'koa'],
+				message: 'Which server do you want to use ?',
+				choices: ['express'],
 				default: 'express'
             }
 		]).then((answers) => {
