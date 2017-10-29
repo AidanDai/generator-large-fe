@@ -1,6 +1,7 @@
 {
     "flexible": false,
     "cssModule": true,
-    "component": "antd-mobile",
-    "server": "express"
+    "component": "antd",
+    "server": "express",
+    "redux": true
 }

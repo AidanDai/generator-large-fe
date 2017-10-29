@@ -45,7 +45,7 @@ module.exports = class extends Generator {
 
             // create views components
             this.fs.copyTpl(
-                this.templatePath('generators/view/templates/view/components/*'),
+                this.templatePath('generators/view/templates/view/components/'),
                 this.destinationPath(`./client/${module}/components/`),
                 setting
             )
@@ -56,20 +56,13 @@ module.exports = class extends Generator {
             utils.writeJSON(webpackConfigPath, entry)
 
             // create soemthing about redux
-            if (setting.redux ) {
+            if (setting.redux) {
                 const reduxHelpers = ['actions', 'constants', 'reducers', 'services', 'stores']
                 reduxHelpers.map((helper) => {
-                    if (helper === 'stores') {
-                        this.fs.copyTpl(
-                            this.templatePath(`generators/view/templates/${helper}.js`),
-                            this.destinationPath(`./client/${module}/${helper}/${key}.js`),
-                            setting
-                        )
-                    }
-
+                    const name = helper === 'stores' ? key : 'index'
                     this.fs.copyTpl(
                         this.templatePath(`generators/view/templates/${helper}.js`),
-                        this.destinationPath(`./client/${module}/${helper}/index.js`),
+                        this.destinationPath(`./client/${module}/${helper}/${name}.js`),
                         setting
                     )
                 })

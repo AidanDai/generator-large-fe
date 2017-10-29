@@ -17,18 +17,12 @@ module.exports = class extends Generator {
 		this.sourceRoot(rootPath)
 		this.install = [
             'axios',
-            'immutable',
             'moment',
             'prop-types',
             'querystring',
             'react',
             'react-dom',
-            'react-immutable-proptypes',
-            'react-redux',
-            'redux',
-            'redux-immutablejs',
-            'redux-thunk',
-            'redux-logger'
+            'prop-types',
         ]
 		this.devInstall = []
         this.author = `${this.user.git.name()} ${this.user.git.email()}`
@@ -80,6 +74,12 @@ module.exports = class extends Generator {
 				default: 'antd'
             },
             {
+				type: 'confirm',
+				name: 'redux',
+				message: 'Enable redux ?',
+				default: true
+			},
+            {
 				type: 'list',
 				name: 'server',
 				message: 'Which server do you want to use ?',
@@ -94,6 +94,7 @@ module.exports = class extends Generator {
 			this.less = answers.less
 			this.postcss = answers.postcss
             this.component = answers.component
+            this.redux = answers.redux
             this.server = answers.server
 		})
 	}
@@ -110,7 +111,18 @@ module.exports = class extends Generator {
 		if (this.component === 'antd-mobile') {
             this.install.push('antd-mobile')
             this.devInstall.push('svg-sprite-loader')
-		}
+        }
+
+        if (this.redux) {
+            this.install = this.install.concat([
+                'immutable',
+                'react-immutable-proptypes',
+                'react-redux',
+                'redux',
+                'redux-immutablejs',
+                'redux-thunk'
+            ])
+        }
 
         // write config
         const configPath = path.join(`${this.sourceRoot(rootPath)}`, 'generators/config.json')
@@ -118,6 +130,7 @@ module.exports = class extends Generator {
             flexible: this.flexible,
             cssModule: this.cssModule,
             component: this.component,
+            redux: this.redux,
             server: this.server
         }
 
@@ -220,15 +233,16 @@ module.exports = class extends Generator {
 			'save-dev': true
         }
 
-		this.npmInstall(this.install)
-		this.npmInstall(devInstall, options)
+		// this.npmInstall(this.install)
+		// this.npmInstall(devInstall, options)
     }
 
     end() {
         // initial view
         this.composeWith(require.resolve('../view'), {
             name: this.name,
-            arguments: [ 'home', 'index' ]
+            redux: this.redux,
+            arguments: [ 'home', 'home' ]
         })
     }
 }
