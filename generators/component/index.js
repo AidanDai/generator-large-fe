@@ -60,7 +60,7 @@ module.exports = class extends Generator {
         }
 
         this.fs.copyTpl(
-            this.templatePath('generators/component/templates'),
+            this.templatePath(`generators/component/templates/${componentType}`),
             this.destinationPath(`${dir}/${componentName}`),
             setting
         )
