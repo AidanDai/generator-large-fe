@@ -46,7 +46,7 @@ module.exports = class extends Generator {
             // create views components
             this.fs.copyTpl(
                 this.templatePath('generators/view/templates/view/components/Page/'),
-                this.destinationPath(`./client/${module}/components/${key}`),
+                this.destinationPath(`./client/${module}/components/${setting.view}`),
                 setting
             )
 

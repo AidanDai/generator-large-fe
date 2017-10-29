@@ -4,6 +4,9 @@ const Generator = require('yeoman-generator')
 const utils = require('../utils')
 
 const rootPath = path.resolve(__dirname, '../..')
+const toFirstUpperCase = (string) => {
+    return `${string.substring(0, 1).toUpperCase()}${string.substring(1)}`
+}
 
 module.exports = class extends Generator {
     constructor(args, options) {
@@ -18,20 +21,20 @@ module.exports = class extends Generator {
         let container = this.options['container']
         let options = this.arguments.slice()
         let module = 'common'
-        let view
         let componentName
+        let componentType = 'containers'
         let l = options.length
-        let dir = `./src/components/`
+        let dir = `./common/components/`
         let moduleIsExist
-        let viewIsExist
 
         if (!container) {
             component = true
+            componentType = 'components'
         }
 
         switch(l) {
             case 1:
-                componentName = options[0]
+                componentName = toFirstUpperCase(options[0])
                 dir = `./client/common/components/`
                 break
             case 2:
@@ -40,34 +43,17 @@ module.exports = class extends Generator {
                 if (!moduleIsExist) {
                     return
                 }
-                componentName = options[1]
-                dir = `./client/${module}/views/components/`
+                componentName = toFirstUpperCase(options[1])
+                dir = `./client/${module}/${componentType}/`
                 break
-            case 3:
-                module = options[0]
-                moduleIsExist = utils.moduleIsExist(this.destinationPath(`./client/${module}`), module)
-                if (!moduleIsExist) {
-                    return
-                }
-                view = options[1]
-                viewIsExist = utils.viewIsExist(this.destinationPath(`./client/${module}/views/${view}`), module, view)
-                if (!viewIsExist) {
-                    return
-                }
-                componentName = options[2]
-                if (component) {
-                    dir = `./client/${module}/views/${view}/components/`
-                } else {
-                    dir = `./client/${module}/views/${view}/containers/`
-                }
             default:
-                componentName = options[0]
+                componentName = toFirstUpperCase(options[0])
                 dir = `./client/common/components/`
         }
 
         let setting = {
             type: component ? '' : 'container',
-            componentName: `${componentName.substring(0, 1).toUpperCase()}${componentName.substring(1)}`,
+            componentName: componentName,
             moduleName: module,
             author: `${this.author}`,
             date: new Date()
