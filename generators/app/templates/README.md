@@ -1,14 +1,20 @@
 # Get Starter
 
 ```
-npm install
+npm install gulp-cli -g && npm install
+
+npm run gulp:dev // only firstly when development or you change some file in `.client/assets`
 
 npm run dll // only firstly when development
+
+npm run init // npm run dll && npm run gulp:dev
 
 npm run dev // start development
 
 npm run deploy // deploy application
 ```
+
+注意：修改 Node.js 代码后需要刷新页面使热加载生效
 
 # Project Structure
 

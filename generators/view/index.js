@@ -28,7 +28,7 @@ module.exports = class extends Generator {
 
         for (let key of options) {
             let setting = {
-                view: key,
+                view: `${key.substring(0, 1).toUpperCase()}${key.substring(1)}`,
                 moduleName: module,
                 author: `${this.author}`,
                 date: new Date(),
@@ -45,8 +45,8 @@ module.exports = class extends Generator {
 
             // create views components
             this.fs.copyTpl(
-                this.templatePath('generators/view/templates/view/components/'),
-                this.destinationPath(`./client/${module}/components/`),
+                this.templatePath('generators/view/templates/view/components/Page/'),
+                this.destinationPath(`./client/${module}/components/${key}`),
                 setting
             )
 
@@ -57,7 +57,7 @@ module.exports = class extends Generator {
 
             // create soemthing about redux
             if (setting.redux) {
-                const reduxHelpers = ['actions', 'constants', 'reducers', 'services', 'stores']
+                const reduxHelpers = ['actions', 'constants', 'reducers', 'models', 'services', 'stores']
                 reduxHelpers.map((helper) => {
                     const name = helper === 'stores' ? key : 'index'
                     this.fs.copyTpl(

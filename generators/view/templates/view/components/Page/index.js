@@ -65,4 +65,4 @@ class Page extends Component {
 
 }
 
-export default Page
+export default <%= view %>

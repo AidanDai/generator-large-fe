@@ -1,5 +1,5 @@
 /*
- * @file: some description for this file
+ * @file: entry for <%= view %> component of <%= moduleName %> modules, some others description for this file
  * @author: <%= author %>
  * @date: <%= date %>
  */
@@ -16,14 +16,14 @@ import { AppContainer } from 'react-hot-loader'
 <% if (redux) { %>
 import { Provider } from 'react-redux'
 
-import store from '../../stores/<%= view %>'
+import store from './stores/<%= view %>'
 <% } %>
 
 <% if (flexible) { %>
 import { FastClick } from 'fastclick'
 <% } %>
-import { getPagedata, getMountNode, attachFastClick } from '../../../common/utils/function'
-import Page from './components/Page'
+import { getPagedata, getMountNode, attachFastClick } from '../common/utils/function'
+import <%= view %> from './components/<%= view %>'
 
 const pageData = getPagedata()
 const mountNode = getMountNode()
@@ -36,21 +36,21 @@ attachFastClick(FastClick)
 ReactDOM.render(
     <AppContainer>
         <Provider store={store}>
-            <Page/>
+            <<%= view %>/>
         </Provider>
     </AppContainer>,
     mountNode
 )
 
 if (module.hot) {
-    module.hot.accept('./containers/Page', () => {
+    module.hot.accept('./containers/<%= view %>', () => {
         // eslint-disable-line global-require
-        const nextPage = require('./containers/Page').default
+        const next<%= view %> = require('./containers/<%= view %>').default
 
         ReactDOM.render(
             <AppContainer>
                 <Provider store={store}>
-                    <nextPage/>
+                    <next<%= view %>/>
                 </Provider>
             </AppContainer>,
             mountNode
@@ -60,19 +60,19 @@ if (module.hot) {
 <% } else { %>
 ReactDOM.render(
     <AppContainer>
-        <Page/>
+        <<%= view %>/>
     </AppContainer>,
     mountNode
 )
 
 if (module.hot) {
-    module.hot.accept('./containers/Page', () => {
+    module.hot.accept('./containers/<%= view %>', () => {
         // eslint-disable-line global-require
-        const nextPage = require('./containers/Page').default
+        const next<%= view %> = require('./containers/<%= view %>').default
 
         ReactDOM.render(
             <AppContainer>
-                <nextPage/>
+                <next<%= view %>/>
             </AppContainer>,
             mountNode
         )

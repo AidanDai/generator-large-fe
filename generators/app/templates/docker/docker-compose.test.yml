@@ -1,0 +1,6 @@
+<%= name %>:
+  image: webaidan/<%= name %>:test
+  net: host
+  environment:
+    NODE_ENV: 'production'
+  command: npm run pro

@@ -4,7 +4,7 @@ const glob = require('glob')
 const nunjucks = require('nunjucks')
 const shell = require('shelljs')
 
-const rootSrc = path.resolve(__dirname, './')
+const rootSrc = path.resolve(__dirname, '../')
 const viewsSrc = path.join(rootSrc, './server/views/development')
 const proViewsSrc = path.join(rootSrc, './server/views/production')
 const tplPaths = glob.sync(path.join(viewsSrc, './**/*.html'))
