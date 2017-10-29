@@ -6,23 +6,23 @@ module.exports = function common(req, res, next) {
         req.FT_PROTO = 'https'
     }
 
-    // overwrite res.render in development
-    if (process.env.NODE_ENV === 'development') {
-        res._render = res.render
+    // overwrite res.render
+    res._render = res.render
+    res.render = function(tpl, context, callback) {
+        const nextContext = Object.assign({}, context, {
+            isDev: env === 'development',
+            isPro: env === 'production'
+        })
 
-        res.render = function(tpl, context, callback) {
-            const nextContext = Object.assign({}, context, {
-                isPro: false,
-                isDev: true
-            })
+        nextContext.pageData = JSON.stringify(nextContext.pageData)
 
-            if (typeof callback === 'function') {
-                res._render(tpl, nextContext, callback(err, tpl))
-            }
-
-            res._render(tpl, nextContext)
+        if (typeof callback === 'function') {
+            res._render(tpl, nextContext, callback(err, tpl))
         }
+
+        res._render(tpl, nextContext)
     }
+
 
     next()
 }

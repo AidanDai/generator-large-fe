@@ -6,11 +6,10 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Perf from 'react-addons-perf'
 
 import './stylesheets/index.css'
 
-class Page extends Component {
+class <%= view %> extends Component {
 
     constructor(props) {
         super(props)

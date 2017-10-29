@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const glob = require('glob')
-// const favicon = require('serve-favicon')
+const favicon = require('serve-favicon')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
@@ -47,7 +47,7 @@ module.exports = function(app, config) {
     app.set('view engine', 'nunjucks')
     nunjucks.configure(viewsPath, { autoescape: true, express: app})
 
-    // app.use(favicon(config.root + '/favicon.ico'))
+    app.use(favicon(config.root + '/favicon.ico'))
     app.use(bodyParser.json({ limit: '1mb' }))
     app.use(bodyParser.urlencoded({ extended: true, limit: '1mb'}))
     app.use(cookieParser(config.app.client_secret))
@@ -62,7 +62,7 @@ module.exports = function(app, config) {
     })
 
     app.use(function(err, req, res, next) {
-        const err = new Error('Not Found')
+        err = new Error('Not Found')
         err.status = 404
         next(err)
     })

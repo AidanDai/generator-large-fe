@@ -18,7 +18,6 @@ module.exports = class extends Generator {
 		this.install = [
             'axios',
             'moment',
-            'prop-types',
             'querystring',
             'react',
             'react-dom',
@@ -208,6 +207,7 @@ module.exports = class extends Generator {
             'gulp-rev',
             'gulp-rev-replace',
             'gulp-size',
+            'gulp-qiniu',
             'gulp-uglify',
             'happypack',
             'image-webpack-loader',
@@ -218,7 +218,6 @@ module.exports = class extends Generator {
             'postcss-import',
             'postcss-loader',
             'postcss-px2rem',
-            'react-addons-perf',
             'react-hot-loader@next',
             'redux-devtools-extension',
             'shelljs',

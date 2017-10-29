@@ -10,6 +10,7 @@ const LessAutoprefix = require('less-plugin-autoprefix')
 const concatCss = require('gulp-concat-css')
 const cleanCSS = require('gulp-clean-css')
 const cssnano = require('gulp-cssnano')
+const px2rem = require('gulp-px3rem')
 
 const rev = require('gulp-rev')
 const size = require('gulp-size')

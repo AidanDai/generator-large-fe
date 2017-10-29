@@ -2,14 +2,12 @@ require('babel-polyfill')
 
 require("react")
 require('prop-types')
-require('react-addons-perf')
 require("react-dom")
 
 require("react-redux")
 
 require("redux")
 require("redux-thunk")
-require('redux-logger')
 
 require('immutable')
 require('redux-immutablejs')

@@ -7,7 +7,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { fromJS } from 'immutable'
-import combined from './reducers'
+import combined from '../reducers'
 
 function reduxStore(initialState) {
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -21,9 +21,9 @@ function reduxStore(initialState) {
     )
     if (module.hot) {
         // Enable Webpack hot module replacement for reducers
-        module.hot.accept('./reducers', () => {
+        module.hot.accept('../reducers', () => {
             // We need to require for hot reloading to work properly.
-            const nextCombined = require('./reducers').default  // eslint-disable-line global-require
+            const nextCombined = require('../reducers').default  // eslint-disable-line global-require
             store.replaceReducer(nextCombined)
         })
     }

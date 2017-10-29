@@ -29,6 +29,7 @@ module.exports = class extends Generator {
         for (let key of options) {
             let setting = {
                 view: `${key.substring(0, 1).toUpperCase()}${key.substring(1)}`,
+                store: `${key}.js`,
                 moduleName: module,
                 author: `${this.author}`,
                 date: new Date(),

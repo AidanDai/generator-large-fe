@@ -16,7 +16,7 @@ import { AppContainer } from 'react-hot-loader'
 <% if (redux) { %>
 import { Provider } from 'react-redux'
 
-import store from './stores/<%= view %>'
+import store from './stores/<%= store %>'
 <% } %>
 
 <% if (flexible) { %>
@@ -43,9 +43,9 @@ ReactDOM.render(
 )
 
 if (module.hot) {
-    module.hot.accept('./containers/<%= view %>', () => {
+    module.hot.accept('./components/<%= view %>', () => {
         // eslint-disable-line global-require
-        const next<%= view %> = require('./containers/<%= view %>').default
+        const next<%= view %> = require('./components/<%= view %>').default
 
         ReactDOM.render(
             <AppContainer>
@@ -66,9 +66,9 @@ ReactDOM.render(
 )
 
 if (module.hot) {
-    module.hot.accept('./containers/<%= view %>', () => {
+    module.hot.accept('./components/<%= view %>', () => {
         // eslint-disable-line global-require
-        const next<%= view %> = require('./containers/<%= view %>').default
+        const next<%= view %> = require('./components/<%= view %>').default
 
         ReactDOM.render(
             <AppContainer>
