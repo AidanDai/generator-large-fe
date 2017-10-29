@@ -1,5 +1,5 @@
 /*
- * @file: some description for this file
+ * @file: <%= componentName %> container component of <%= moduleName %> modules; some description for this file
  * @author: <%= author %>
  * @date: <%= date %>
  */

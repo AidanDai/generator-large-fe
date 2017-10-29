@@ -24,7 +24,7 @@ Example:
                 --container is container component
 ```
 
-app/client/common/components/Header
+app/client/Home/components/Header
 
 ```
 .
@@ -36,4 +36,10 @@ app/client/common/components/Header
 └── index.js
 ```
 
+app/client/Home/containers/Header
+
+```
+.
+└── index.js
+```
 注：具体每个目录结构的用途请参见该文件夹下的 README.md
