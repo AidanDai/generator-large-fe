@@ -5,9 +5,6 @@
  */
 
 import React, { Component } from 'react'
-<% if (redux) { %>
-import { connect } from 'react-redux'
-<% } %>
 import PropTypes from 'prop-types'
 import Perf from 'react-addons-perf'
 
@@ -17,14 +14,6 @@ class Page extends Component {
 
     constructor(props) {
         super(props)
-    }
-
-    getChildContext() {
-        return {
-            app: {
-                generator: 'generator-large-fe'
-            }
-        }
     }
 
     render() {
@@ -76,18 +65,4 @@ class Page extends Component {
 
 }
 
-Page.childContextTypes = {
-    app: PropTypes.objectOf(PropTypes.string)
-}
-
-<% if (redux) { %>
-function mapStateToProps(state) {
-    return {
-
-    }
-}
-
-export default connect(mapStateToProps)(Page)
-<% } else { %>
 export default Page
-<% } %>

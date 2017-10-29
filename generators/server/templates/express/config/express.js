@@ -61,14 +61,14 @@ module.exports = function(app, config) {
         require(controller)(app)
     })
 
-    app.use(function(req, res, next) {
+    app.use(function(err, req, res, next) {
         const err = new Error('Not Found')
         err.status = 404
         next(err)
     })
 
     if (app.get('env') === 'development') {
-        app.use(function(err, req, res) {
+        app.use(function(err, req, res, next) {
             res.status(err.status || 500)
             res.render('error.html', {
                 message: err.message,
@@ -78,7 +78,7 @@ module.exports = function(app, config) {
         })
     }
 
-    app.use(function(err, req, res) {
+    app.use(function(err, req, res, next) {
         res.status(err.status || 500)
         res.render('error.html', {
             message: err.message,

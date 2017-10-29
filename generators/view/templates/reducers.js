@@ -5,9 +5,6 @@
  */
 
 import { combineReducers } from 'redux-immutablejs'
-import {
-
-} from '../constants/<%= view %>'
 
 const reducers = {
 

@@ -1,38 +1,47 @@
-# Example Home Module Structure
+# Example Chat Module Structure
 
 ```
 ├── actions                             // redux action 目录
-│   ├── index.js                        // index page redux action
+│   ├── chat.js 
+│   ├── user.js 
+│   ├── socket.js 
+│   └── message.js                         
+├── components                          // 展示组件目录
+│   └── chat                            
+│       ├── images                      
+│       ├── stylesheets                
+│       │   └── index.less              
+│       └── index.js                    
 ├── constants                           // redux action type constant 目录
-│   ├── index.js                        // index page redux action constant
+│   ├── chat.js 
+│   ├── user.js 
+│   ├── socket.js 
+│   └── message.js                          
 ├── reducers                            // redux reducer 目录
-│   ├── index.js                        // index page redux reducer
+│   ├── chat.js 
+│   ├── user.js 
+│   ├── socket.js 
+│   └── message.js                        
+├── containers                          // 容器组件目录
+│   └── chat                            
+│       ├── images                      
+│       ├── stylesheets                   
+│       │   └── index.less       
+│       └── index.js            
 ├── services                            // service 目录
-│   ├── index.js                        // index page service
+│   ├── chat.js 
+│   ├── user.js 
+│   ├── socket.js 
+│   ├── client.js 
+│   └── message.js                         
 ├── stores                              // redux store 目录
-│   ├── index.js                        // index page redux store
-├── utils                               // 模块工具函数目录
-└── views                               // view 目录
-    ├── components                      // 公共展示组件目录
-    │   └── Header                      // Header 组件目录
-    │       ├── images                  // Header 组件图片目录
-    │       ├── stylesheets             // Header 组件样式目录
-    │       │   └── index.css           // Header 组件样式入口文件
-    │       └── index.js                // Header 组件入口文件
-    └── index                           // index 页面目录
-        ├── components                  // index 页面组件目录
-        │   └── Footer                  // Footer 组件目录
-        │       ├── images              // Footer 组件图片目录
-        │       ├── stylesheets         // Footer 组件样式目录
-        │       │   └── index.less      // Footer 组件样式入口文件
-        │       └── index.js            // Footer 组件入口文件
-        ├── containers                  // index 页面容器组件目录
-        │   └── Page                    // index 页面容器组件目录
-        │       ├── images              // index 页面容器组件图片目录
-        │       ├── stylesheets         // index 页面容器组件样式目录
-        │       │   └── index.css       // Page 容器组件样式入口文件
-        │       └── index.js            // Page 容器组件入口文件
-        └── index.js                    // index 页面入口文件
+│   ├── list.js 
+│   └── room.js                      
+├── utils                               // 工具函数目录
+├── create.js                           // 创建快聊页面入口文件
+├── list.js                             // 快聊列表页面入口文件
+├── detail.js                           // 快聊详情页面入口文件
+└── room.js                             // 快聊聊天室页面入口文件
 ```
 
 注：

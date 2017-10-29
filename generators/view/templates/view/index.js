@@ -23,7 +23,7 @@ import store from '../../stores/<%= view %>'
 import { FastClick } from 'fastclick'
 <% } %>
 import { getPagedata, getMountNode, attachFastClick } from '../../../common/utils/function'
-import Page from './containers/Page'
+import Page from './components/Page'
 
 const pageData = getPagedata()
 const mountNode = getMountNode()

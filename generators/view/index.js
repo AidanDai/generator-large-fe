@@ -36,25 +36,40 @@ module.exports = class extends Generator {
                 redux: this.options['redux'] || false
             }
 
-            // create views
+            // create views index
             this.fs.copyTpl(
-                this.templatePath('generators/view/templates/view'),
-                this.destinationPath(`./client/${module}/views/${key}`),
+                this.templatePath('generators/view/templates/view/index.js'),
+                this.destinationPath(`./client/${module}/${key}.js`),
+                setting
+            )
+
+            // create views components
+            this.fs.copyTpl(
+                this.templatePath('generators/view/templates/view/components/*'),
+                this.destinationPath(`./client/${module}/components/`),
                 setting
             )
 
             // create webpack entry map
             const entry = {}
-            entry[`${module}/${key}`] = `./${module}/views/${key}`
+            entry[`${module}/${key}`] = `./${module}/${key}.js`
             utils.writeJSON(webpackConfigPath, entry)
 
             // create soemthing about redux
             if (setting.redux ) {
                 const reduxHelpers = ['actions', 'constants', 'reducers', 'services', 'stores']
                 reduxHelpers.map((helper) => {
+                    if (helper === 'stores') {
+                        this.fs.copyTpl(
+                            this.templatePath(`generators/view/templates/${helper}.js`),
+                            this.destinationPath(`./client/${module}/${helper}/${key}.js`),
+                            setting
+                        )
+                    }
+
                     this.fs.copyTpl(
                         this.templatePath(`generators/view/templates/${helper}.js`),
-                        this.destinationPath(`./client/${module}/${helper}/${key}.js`),
+                        this.destinationPath(`./client/${module}/${helper}/index.js`),
                         setting
                     )
                 })

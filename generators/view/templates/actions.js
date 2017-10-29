@@ -3,7 +3,3 @@
  * @author: <%= author %>
  * @date: <%= date %>
  */
-
-import {
-
-} from '../constants/<%= view %>'
