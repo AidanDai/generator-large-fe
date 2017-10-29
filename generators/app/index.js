@@ -233,8 +233,8 @@ module.exports = class extends Generator {
 			'save-dev': true
         }
 
-		// this.npmInstall(this.install)
-		// this.npmInstall(devInstall, options)
+		this.npmInstall(this.install)
+		this.npmInstall(devInstall, options)
     }
 
     end() {

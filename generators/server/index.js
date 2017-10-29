@@ -46,7 +46,7 @@ module.exports = class extends Generator {
             express: this.install.concat(this.expressInstall)
         }
 
-		// this.npmInstall(install[this.server])
+		this.npmInstall(install[this.server])
     }
 }
 
