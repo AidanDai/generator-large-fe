@@ -1,7 +1,7 @@
 FROM debian:jessie
 
-ENV NODE_VERSION 6.11.2
-ENV NPM_VERSION 3.10.10
+ENV NODE_VERSION 8.9.1
+ENV NPM_VERSION 5.5.1
 
 RUN buildDeps='curl' \
     && apt-get update \
